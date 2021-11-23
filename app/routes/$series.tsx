@@ -2,18 +2,10 @@ import { NavLink, Outlet, useLoaderData } from "remix";
 import type { LoaderFunction, LinksFunction } from "remix";
 import { request } from "~/lib/dato-client";
 import postStylesUrl from "~/styles/post.css";
+import type { SeriesRecord } from "~/lib/types.d";
 
-type SeriesData = {
-  series: {
-    title: string;
-    posts: [
-      {
-        title: string;
-        slug: string;
-      }
-    ];
-    login: string;
-  };
+type LoaderData = {
+  series: SeriesRecord;
 };
 
 const SERIES_QUERY = `query Series($slug: String) {
@@ -33,7 +25,7 @@ export const loader: LoaderFunction = ({ params }) => {
   });
 };
 
-export function meta({ data }: { data: SeriesData }) {
+export function meta({ data }: { data: LoaderData }) {
   const { series } = data;
   return {
     title: series.title,
@@ -46,7 +38,7 @@ export const links: LinksFunction = () => {
 };
 
 export default function Index() {
-  let { series } = useLoaderData<SeriesData>();
+  let { series } = useLoaderData<LoaderData>();
 
   return (
     <main className="container">
@@ -58,7 +50,7 @@ export default function Index() {
             {series.posts.map(({ slug, title }) => (
               <li key={slug}>
                 <NavLink
-                  to={slug}
+                  to={slug as string}
                   className={({ isActive }) => (isActive ? "is-active" : "")}
                 >
                   {title}

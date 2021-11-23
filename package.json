@@ -10,7 +10,9 @@
     "build:worker": "esbuild --define:process.env.NODE_ENV='\"production\"' --minify --bundle --sourcemap --outdir=dist ./worker",
     "dev:worker": "esbuild --define:process.env.NODE_ENV='\"development\"' --bundle --sourcemap --outdir=dist ./worker",
     "start": "miniflare --build-command \"npm run dev:worker\" --watch",
-    "deploy": "npm run build && wrangler publish"
+    "deploy": "npm run build && wrangler publish",
+    "generate": "graphql-codegen -r dotenv/config",
+    "pregenerate": "node dato-cms/introspect"
   },
   "dependencies": {
     "@remix-run/cloudflare-workers": "^1.0.3",
@@ -23,10 +25,14 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^2.2.2",
     "@cloudflare/wrangler": "^1.19.5",
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/typescript": "^2.4.1",
     "@remix-run/dev": "^1.0.3",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
+    "dotenv": "^10.0.0",
     "esbuild": "0.13.14",
+    "graphql": "^15.7.2",
     "miniflare": "2.0.0-next.3",
     "typescript": "^4.1.2"
   },

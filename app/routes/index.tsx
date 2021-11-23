@@ -1,14 +1,10 @@
 import type { MetaFunction, LoaderFunction } from "remix";
 import { useLoaderData, Link } from "remix";
 import { request } from "~/lib/dato-client";
+import type { SeriesRecord } from "~/lib/types.d";
 
-type AllSeriesData = {
-  allSeries: [
-    {
-      title: string;
-      slug: string;
-    }
-  ];
+type LoaderData = {
+  allSeries: SeriesRecord[];
 };
 
 const ALL_SERIES_QUERY = `query AllSeries($limit: IntType) {
@@ -33,13 +29,13 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  let { allSeries } = useLoaderData<AllSeriesData>();
+  let { allSeries } = useLoaderData<LoaderData>();
 
   return (
     <ul>
       {allSeries.map(({ title, slug }) => (
         <li>
-          <Link to={slug}>{title}</Link>
+          <Link to={slug as string}>{title}</Link>
         </li>
       ))}
     </ul>
