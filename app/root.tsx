@@ -17,6 +17,18 @@ import Logo from "~/components/Logo";
 
 export const links: LinksFunction = () => {
   return [
+    {
+      rel: "preload",
+      href: "/fonts/marb-sans-regular.woff2",
+      as: "font",
+      crossOrigin: "anonymous",
+    },
+    {
+      rel: "preload",
+      href: "/fonts/marb-sans-bold.woff2",
+      as: "font",
+      crossOrigin: "anonymous",
+    },
     { rel: "stylesheet", href: globalStylesUrl },
     {
       rel: "stylesheet",
