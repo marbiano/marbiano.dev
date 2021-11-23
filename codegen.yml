@@ -1,0 +1,5 @@
+schema: dato-cms/schema.gql
+generates:
+  ./app/lib/types.d.ts:
+    plugins:
+      - typescript

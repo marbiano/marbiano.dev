@@ -5,9 +5,7 @@ type RequestFunction = {
 };
 
 export async function request({ query, variables, preview }: RequestFunction) {
-  const endpoint = preview
-    ? `https://graphql.datocms.com/preview`
-    : `https://graphql.datocms.com/`;
+  const endpoint = preview ? `${DATOCMS_API_URL}/preview` : DATOCMS_API_URL;
 
   const response = await fetch(endpoint, {
     method: "POST",
