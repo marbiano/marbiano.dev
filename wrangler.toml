@@ -1,10 +1,10 @@
-name = "remix-cloudflare-workers"
+name = "marbiano"
 type = "javascript"
-
-zone_id = ""
-account_id = ""
-route = ""
-workers_dev = true
+workers_dev = false
+account_id = "71fabf45fe62453d4c8554e835ca4781"
+zone_id = "9b0305767b86bbda17623a2608822a1b"
+route = "marbiano.dev/*"
+compatibility_date = "2021-11-22"
 
 [site]
 bucket = "./public"
