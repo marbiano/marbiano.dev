@@ -27,11 +27,16 @@
 }
 
 :root {
-  --color-foreground: 300 7% 3%;
-  --color-background: 120 4% 77%;
-  --color-links: hsl(213, 100%, 52%);
-  --color-links-hover: hsl(213, 100%, 43%);
-  --color-border: hsl(0, 0%, 82%);
+  --color-black: 300 7% 3%;
+  --color-orange: 18 83% 47%;
+  --color-light-green: 120 4% 77%;
+  --color-blue: 212 88% 48%;
+  --color-blue-light: 212 88% 60%;
+
+  --color-foreground: var(--color-black);
+  --color-background: var(--color-light-green);
+  --color-links: hsl(var(--color-blue));
+  --color-links-hover: hsl(var(--color-blue-light));
   --font-body: MarbSans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -59,14 +64,13 @@ html,
 body {
   padding: 0;
   margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: var(--font-body);
-  font-size: 1.1875rem;
-  line-height: 1.5;
   color: hsl(var(--color-foreground));
   background: linear-gradient(
     -160deg,
@@ -107,4 +111,25 @@ input:where([type="search"]) {
   padding-left: 0.5em;
   background-color: hsl(0 0% 100% / 20%);
   color: var(--color-foreground);
+}
+
+.root {
+  position: relative;
+}
+
+.logo {
+  color: #fff;
+  position: fixed;
+  top: 1.5rem;
+  left: 2rem;
+  z-index: 9999;
+}
+
+.logo:hover {
+  color: hsl(300 7% 3%);
+}
+
+.logo svg {
+  display: block;
+  width: 2rem;
 }

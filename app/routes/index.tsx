@@ -1,5 +1,6 @@
-import type { MetaFunction, LoaderFunction } from "remix";
+import type { MetaFunction, LoaderFunction, LinksFunction } from "remix";
 import { useLoaderData, json, Link } from "remix";
+import postStylesUrl from "~/styles/post.css";
 
 type IndexData = {
   resources: Array<{ name: string; url: string }>;
@@ -54,20 +55,24 @@ export let meta: MetaFunction = () => {
   };
 };
 
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: postStylesUrl }];
+};
+
 // https://remix.run/guides/routing#index-routes
 export default function Index() {
   let data = useLoaderData<IndexData>();
 
   return (
-    <>
-      <main className="main">
+    <main className="container">
+      <article className="post">
         <header className="header">
           <h1 className="title">
             <span>Hybrid Meetups</span>
           </h1>
           <div className="created">Sep 22, 2021</div>
         </header>
-        <div className="content">
+        <section className="content">
           <p>
             The first step is to set a body text size. Responsive sites usually
             define multiple text sizes for body at different viewports. I do
@@ -137,14 +142,24 @@ export default function Index() {
             increasing the body text size. I want to use the space, not just
             fill it.
           </p>
+        </section>
+      </article>
+      <section className="series">
+        <div className="series-content">
+          <h2 className="series-title">Learning Remix</h2>
+          <ul className="series-list">
+            <li>
+              <Link to="/test">Let’s build a rocketship</Link>
+            </li>
+            <li>
+              <Link to="/test">Complex front-end problems</Link>
+            </li>
+            <li>
+              <Link to="/test">SSR is cool again</Link>
+            </li>
+          </ul>
         </div>
-      </main>
-      <div className="read-next">
-        <h2>Read Next</h2>
-        <Link to="/test">
-          <a>Reasons to React</a>
-        </Link>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }
