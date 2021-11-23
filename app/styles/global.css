@@ -13,15 +13,38 @@
 }
 
 @font-face {
-  font-family: MarbMono;
-  src: url(/fonts/marb-mono-regular.woff2) format("woff2");
+  font-family: MarbSerif;
+  src: url(/fonts/marb-serif-regular.woff2) format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: MarbSerif;
-  src: local("Blanco Trial");
+  src: url(/fonts/marb-serif-regular-italic.woff2) format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: MarbSerif;
+  src: url(/fonts/marb-serif-bold.woff2) format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: MarbSerif;
+  src: url(/fonts/marb-serif-bold-italic.woff2) format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: MarbMono;
+  src: url(/fonts/marb-mono-regular.woff2) format("woff2");
   font-weight: 400;
   font-display: swap;
 }
@@ -55,10 +78,10 @@ html {
   outline: auto;
 }
 
-:focus {
+/* :focus {
   outline: var(--color-links) solid 2px;
   outline-offset: 2px;
-}
+} */
 
 html,
 body {

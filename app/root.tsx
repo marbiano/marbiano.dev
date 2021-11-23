@@ -28,6 +28,12 @@ export const links: LinksFunction = () => {
       as: "font",
       crossOrigin: "anonymous",
     },
+    {
+      rel: "preload",
+      href: "/fonts/marb-serif-regular.woff2",
+      as: "font",
+      crossOrigin: "anonymous",
+    },
     { rel: "stylesheet", href: globalStylesUrl },
   ];
 };
