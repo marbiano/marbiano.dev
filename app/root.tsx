@@ -12,7 +12,6 @@ import {
 import type { LinksFunction } from "remix";
 
 import globalStylesUrl from "~/styles/global.css";
-import mainStylesUrl from "~/styles/main.css";
 import Logo from "~/components/Logo";
 
 export const links: LinksFunction = () => {
@@ -29,11 +28,13 @@ export const links: LinksFunction = () => {
       as: "font",
       crossOrigin: "anonymous",
     },
-    { rel: "stylesheet", href: globalStylesUrl },
     {
-      rel: "stylesheet",
-      href: mainStylesUrl,
+      rel: "preload",
+      href: "/fonts/marb-serif-regular.woff2",
+      as: "font",
+      crossOrigin: "anonymous",
     },
+    { rel: "stylesheet", href: globalStylesUrl },
   ];
 };
 
@@ -75,7 +76,7 @@ function Document({
 
 function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
-    <div className="container">
+    <div className="root">
       <Link to="/" className="logo">
         <Logo />
       </Link>
