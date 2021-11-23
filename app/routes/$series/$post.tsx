@@ -12,7 +12,7 @@ type PostData = {
   };
 };
 
-const POST_QUERY = `query POST($slug: String) {
+const POST_QUERY = `query Post($slug: String) {
   post(filter: { slug: { eq: $slug }}) {
     title
     published: _publishedAt
