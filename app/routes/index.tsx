@@ -15,31 +15,31 @@ export let loader: LoaderFunction = () => {
     resources: [
       {
         name: "Remix Docs",
-        url: "https://remix.run/docs"
+        url: "https://remix.run/docs",
       },
       {
         name: "React Router Docs",
-        url: "https://reactrouter.com/docs"
+        url: "https://reactrouter.com/docs",
       },
       {
         name: "Remix Discord",
-        url: "https://discord.gg/VBePs6d"
-      }
+        url: "https://discord.gg/VBePs6d",
+      },
     ],
     demos: [
       {
         to: "demos/actions",
-        name: "Actions"
+        name: "Actions",
       },
       {
         to: "demos/about",
-        name: "Nested Routes, CSS loading/unloading"
+        name: "Nested Routes, CSS loading/unloading",
       },
       {
         to: "demos/params",
-        name: "URL Params and Error Boundaries"
-      }
-    ]
+        name: "URL Params and Error Boundaries",
+      },
+    ],
   };
 
   // https://remix.run/api/remix#json
@@ -50,7 +50,7 @@ export let loader: LoaderFunction = () => {
 export let meta: MetaFunction = () => {
   return {
     title: "Remix Starter",
-    description: "Welcome to remix!"
+    description: "Welcome to remix!",
   };
 };
 
@@ -59,42 +59,92 @@ export default function Index() {
   let data = useLoaderData<IndexData>();
 
   return (
-    <div className="remix__page">
-      <main>
-        <h2>Welcome to Remix!</h2>
-        <p>We're stoked that you're here. 🥳</p>
-        <p>
-          Feel free to take a look around the code to see how Remix does things,
-          it might be a bit different than what you’re used to. When you're
-          ready to dive deeper, we've got plenty of resources to get you
-          up-and-running quickly.
-        </p>
-        <p>
-          Check out all the demos in this starter, and then just delete the{" "}
-          <code>app/routes/demos</code> and <code>app/styles/demos</code>{" "}
-          folders when you're ready to turn this into your next project.
-        </p>
+    <>
+      <main className="main">
+        <header className="header">
+          <h1 className="title">
+            <span>Hybrid Meetups</span>
+          </h1>
+          <div className="created">Sep 22, 2021</div>
+        </header>
+        <div className="content">
+          <p>
+            The first step is to set a body text size. Responsive sites usually
+            define multiple text sizes for body at different viewports. I do
+            this, too, but my preference is to have as few sizes as I can. I
+            want fewer things to manage, thank you.
+          </p>
+
+          <p>
+            As I’ve previously written, once I have enough visual space in the
+            browser window to accommodate my preferred body type size, I stay
+            with it. My preference is to approach the extra space of larger
+            viewports as a layout challenge, not as a process of continually
+            increasing the body text size. I want to use the space, not just
+            fill it.
+          </p>
+          <p>
+            The first step is to set a body text size. Responsive sites usually
+            define multiple text sizes for body at different viewports. I do
+            this, too, but my preference is to have as few sizes as I can. I
+            want fewer things to manage, thank you.
+          </p>
+
+          <p>
+            As I’ve previously written, once I have enough visual space in the
+            browser window to accommodate my preferred body type size, I stay
+            with it. My preference is to approach the extra space of larger
+            viewports as a layout challenge, not as a process of continually
+            increasing the body text size. I want to use the space, not just
+            fill it.
+          </p>
+
+          <hr className="separator" />
+
+          <p>
+            The first step is to set a body text size. Responsive sites usually
+            define multiple text sizes for body at different viewports. I do
+            this, too, but my preference is to have as few sizes as I can. I
+            want fewer things to manage, thank you.
+          </p>
+
+          <p>
+            As I’ve previously written, once I have enough visual space in the
+            browser window to accommodate my preferred body type size, I stay
+            with it. My preference is to approach the extra space of larger
+            viewports as a layout challenge, not as a process of continually
+            increasing the body text size. I want to use the space, not just
+            fill it.
+          </p>
+          <h2>We are coming</h2>
+          <p>
+            The first step is to set a body text size. Responsive sites usually
+            define multiple text sizes for body at different viewports. I do
+            this, too, but my preference is to have as few sizes as I can. I
+            want fewer things to manage, thank you.
+          </p>
+          <ul>
+            <li>First item of the list.</li>
+            <li>Second item of the list.</li>
+            <li>Third item of the list.</li>
+            <li>Fourth item of the list.</li>
+          </ul>
+          <p>
+            As I’ve previously written, once I have enough visual space in the
+            browser window to accommodate my preferred body type size, I stay
+            with it. My preference is to approach the extra space of larger
+            viewports as a layout challenge, not as a process of continually
+            increasing the body text size. I want to use the space, not just
+            fill it.
+          </p>
+        </div>
       </main>
-      <aside>
-        <h2>Demos In This App</h2>
-        <ul>
-          {data.demos.map(demo => (
-            <li key={demo.to} className="remix__page__resource">
-              <Link to={demo.to} prefetch="intent">
-                {demo.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <h2>Resources</h2>
-        <ul>
-          {data.resources.map(resource => (
-            <li key={resource.url} className="remix__page__resource">
-              <a href={resource.url}>{resource.name}</a>
-            </li>
-          ))}
-        </ul>
-      </aside>
-    </div>
+      <div className="read-next">
+        <h2>Read Next</h2>
+        <Link to="/test">
+          <a>Reasons to React</a>
+        </Link>
+      </div>
+    </>
   );
 }

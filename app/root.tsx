@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -11,15 +12,15 @@ import {
 import type { LinksFunction } from "remix";
 
 import globalStylesUrl from "~/styles/global.css";
-import darkStylesUrl from "~/styles/dark.css";
+import mainStylesUrl from "~/styles/main.css";
+import Logo from "~/components/Logo";
 
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: globalStylesUrl },
     {
       rel: "stylesheet",
-      href: darkStylesUrl,
-      media: "(prefers-color-scheme: dark)",
+      href: mainStylesUrl,
     },
   ];
 };
@@ -61,7 +62,14 @@ function Document({
 }
 
 function Layout({ children }: React.PropsWithChildren<{}>) {
-  return <div className="container">{children}</div>;
+  return (
+    <div className="container">
+      <Link to="/" className="logo">
+        <Logo />
+      </Link>
+      {children}
+    </div>
+  );
 }
 
 export function CatchBoundary() {
