@@ -16,6 +16,3 @@ watch_dir = "build/index.js"
 
 [build.upload]
 format="service-worker"
-
-[vars]
-DATOCMS_API_TOKEN = "4edd16d6371266672892b34745cc15"
