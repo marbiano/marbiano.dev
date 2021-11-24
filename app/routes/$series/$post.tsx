@@ -13,14 +13,25 @@ const POST_QUERY = `query Post($slug: String) {
   post(filter: { slug: { eq: $slug }}) {
     title
     _publishedAt
+    cover {
+      url
+      alt
+    }
     content {
       value
+    }
+    metadata {
+      title
+      description
+      image {
+        url
+      }
+      twitterCard
     }
   }
 }`;
 
 export const loader: LoaderFunction = ({ params }) => {
-  console.log();
   return request({
     query: POST_QUERY,
     variables: { slug: params.post },
@@ -29,17 +40,25 @@ export const loader: LoaderFunction = ({ params }) => {
 
 export function meta({ data }: { data: LoaderData }) {
   const { post } = data;
+  const { metadata } = post;
   return {
-    title: post.title,
+    title: metadata?.title || post.title,
+    description: metadata?.description || "",
+    "og:image": metadata?.image?.url,
   };
 }
 
 export default function Index() {
   let { post } = useLoaderData<LoaderData>();
-  const { title, content, _publishedAt: published } = post;
+  const { title, content, _publishedAt: published, cover } = post;
 
   return (
     <article className="post">
+      {cover && (
+        <div className="cover">
+          <img src={cover.url} alt={cover.alt as string} />
+        </div>
+      )}
       <header className="header">
         <h1 className="title">
           <span>{title}</span>

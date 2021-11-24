@@ -148,6 +148,30 @@ type FileField {
   width: IntType
 }
 
+"""Specifies how to filter Single-file/image fields"""
+input FileFilter {
+  """
+  Search for records with an exact match. The specified value must be an Upload ID
+  """
+  eq: UploadId
+
+  """
+  Exclude records with an exact match. The specified value must be an Upload ID
+  """
+  neq: UploadId
+
+  """Filter records that have one of the specified uploads"""
+  in: [UploadId]
+
+  """Filter records that do not have one of the specified uploads"""
+  notIn: [UploadId]
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
 """
 Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 """
@@ -1669,6 +1693,8 @@ input PostModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
+  metadata: SeoFilter
+  cover: FileFilter
   content: StructuredTextFilter
   slug: SlugFilter
   title: StringFilter
@@ -1735,8 +1761,10 @@ type PostRecord {
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
   ): PostModelContentField
+  cover: FileField
   createdAt: DateTime!
   id: ItemId!
+  metadata: SeoField
   slug(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -1923,6 +1951,14 @@ type SeoField {
   image: FileField
   title: String
   twitterCard: String
+}
+
+"""Specifies how to filter SEO meta tags fields"""
+input SeoFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
 }
 
 input SeriesModelFilter {
