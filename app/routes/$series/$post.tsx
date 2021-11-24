@@ -45,8 +45,9 @@ export function meta({ data }: { data: LoaderData }) {
   const { metadata } = post;
   return {
     title: metadata?.title || post.title,
-    description: metadata?.description || "",
+    description: metadata?.description,
     "og:title": metadata?.title || post.title,
+    "og:description": metadata?.description,
     "og:image": metadata?.image?.url,
     "og:url": data.url,
     "twitter:card": metadata?.twitterCard,
