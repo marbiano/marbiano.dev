@@ -1,4 +1,4 @@
-import { useLoaderData } from "remix";
+import { useLoaderData, json } from "remix";
 import type { LoaderFunction } from "remix";
 import { StructuredText } from "react-datocms";
 import type { StructuredText as StructuredTextType } from "datocms-structured-text-utils";
@@ -7,6 +7,7 @@ import type { PostRecord } from "~/lib/types.d";
 
 type LoaderData = {
   post: PostRecord;
+  url: string;
 };
 
 const POST_QUERY = `query Post($slug: String) {
@@ -31,11 +32,12 @@ const POST_QUERY = `query Post($slug: String) {
   }
 }`;
 
-export const loader: LoaderFunction = ({ params }) => {
-  return request({
+export const loader: LoaderFunction = async ({ request: req, params }) => {
+  const data = await request({
     query: POST_QUERY,
     variables: { slug: params.post },
   });
+  return json({ ...data, url: req.url });
 };
 
 export function meta({ data }: { data: LoaderData }) {
@@ -44,9 +46,10 @@ export function meta({ data }: { data: LoaderData }) {
   return {
     title: metadata?.title || post.title,
     description: metadata?.description || "",
+    "og:title": metadata?.title || post.title,
     "og:image": metadata?.image?.url,
+    "og:url": data.url,
     "twitter:card": metadata?.twitterCard,
-    "twitter:image": metadata?.image?.url,
   };
 }
 
