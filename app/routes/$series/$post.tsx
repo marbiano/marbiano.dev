@@ -45,6 +45,8 @@ export function meta({ data }: { data: LoaderData }) {
     title: metadata?.title || post.title,
     description: metadata?.description || "",
     "og:image": metadata?.image?.url,
+    "twitter:card": metadata?.twitterCard,
+    "twitter:image": metadata?.image?.url,
   };
 }
 
