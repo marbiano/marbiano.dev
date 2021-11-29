@@ -34,6 +34,14 @@ type ColorField {
   red: IntType
 }
 
+"""Specifies how to filter Color fields"""
+input ColorFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
 """Specifies how to filter by creation datetime"""
 input CreatedAtFilter {
   """
@@ -1693,8 +1701,8 @@ input PostModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
+  accentColor: ColorFilter
   metadata: SeoFilter
-  cover: FileFilter
   content: StructuredTextFilter
   slug: SlugFilter
   title: StringFilter
@@ -1757,11 +1765,11 @@ type PostRecord {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  accentColor: ColorField
   content(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
   ): PostModelContentField
-  cover: FileField
   createdAt: DateTime!
   id: ItemId!
   metadata: SeoField
@@ -1973,6 +1981,7 @@ input SeriesModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
+  art: FileFilter
   posts: LinksFilter
   slug: SlugFilter
   title: StringFilter
@@ -2031,6 +2040,7 @@ type SeriesRecord {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  art: FileField
   createdAt: DateTime!
   id: ItemId!
   posts: [PostRecord!]!

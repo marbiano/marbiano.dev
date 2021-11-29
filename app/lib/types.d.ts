@@ -60,6 +60,12 @@ export type ColorField = {
   red?: Maybe<Scalars['IntType']>;
 };
 
+/** Specifies how to filter Color fields */
+export type ColorFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+};
+
 /** Specifies how to filter by creation datetime */
 export type CreatedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
@@ -1533,8 +1539,8 @@ export type PostModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  accentColor?: InputMaybe<ColorFilter>;
   content?: InputMaybe<StructuredTextFilter>;
-  cover?: InputMaybe<FileFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
   metadata?: InputMaybe<SeoFilter>;
@@ -1587,8 +1593,8 @@ export type PostRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  accentColor?: Maybe<ColorField>;
   content?: Maybe<PostModelContentField>;
-  cover?: Maybe<FileField>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   metadata?: Maybe<SeoField>;
@@ -1821,6 +1827,7 @@ export type SeriesModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  art?: InputMaybe<FileFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
   posts?: InputMaybe<LinksFilter>;
@@ -1872,6 +1879,7 @@ export type SeriesRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  art?: Maybe<FileField>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   posts: Array<PostRecord>;

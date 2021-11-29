@@ -1,9 +1,10 @@
 import { useLoaderData, json } from "remix";
-import type { LoaderFunction } from "remix";
+import type { LoaderFunction, LinksFunction } from "remix";
 import { StructuredText } from "react-datocms";
 import type { StructuredText as StructuredTextType } from "datocms-structured-text-utils";
 import { request } from "~/lib/dato-client";
 import type { PostRecord } from "~/lib/types.d";
+import postStylesUrl from "~/styles/post.css";
 
 type LoaderData = {
   post: PostRecord;
@@ -14,10 +15,6 @@ const POST_QUERY = `query Post($slug: String) {
   post(filter: { slug: { eq: $slug }}) {
     title
     _publishedAt
-    cover {
-      url
-      alt
-    }
     content {
       value
     }
@@ -28,6 +25,11 @@ const POST_QUERY = `query Post($slug: String) {
         url
       }
       twitterCard
+    }
+    accentColor {
+      red
+      blue
+      green
     }
   }
 }`;
@@ -42,29 +44,35 @@ export const loader: LoaderFunction = async ({ request: req, params }) => {
 
 export function meta({ data }: { data: LoaderData }) {
   const { post } = data;
-  const { metadata } = post;
   return {
-    title: metadata?.title || post.title,
-    description: metadata?.description,
-    "og:title": metadata?.title || post.title,
-    "og:description": metadata?.description,
-    "og:image": metadata?.image?.url,
+    title: post.metadata?.title || post.title,
+    description: post.metadata?.description,
+    "og:title": post.metadata?.title || post.title,
+    "og:description": post.metadata?.description,
+    "og:image": post.metadata?.image?.url,
     "og:url": data.url,
-    "twitter:card": metadata?.twitterCard,
+    "twitter:card": post.metadata?.twitterCard,
   };
 }
 
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: postStylesUrl }];
+};
+
 export default function Index() {
   let { post } = useLoaderData<LoaderData>();
-  const { title, content, _publishedAt: published, cover } = post;
+  const { title, content, _publishedAt: published, accentColor } = post;
+  const accentColorStyle = accentColor
+    ? `${accentColor.red}, ${accentColor.blue}, ${accentColor.green}`
+    : null;
 
   return (
-    <article className="post">
-      {cover && (
-        <div className="cover">
-          <img src={cover.url} alt={cover.alt as string} />
-        </div>
-      )}
+    <article
+      className="post"
+      style={{
+        "--accent-color": accentColorStyle,
+      }}
+    >
       <header className="header">
         <h1 className="title">
           <span>{title}</span>

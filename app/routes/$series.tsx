@@ -1,8 +1,8 @@
 import { NavLink, Outlet, useLoaderData } from "remix";
 import type { LoaderFunction, LinksFunction } from "remix";
 import { request } from "~/lib/dato-client";
-import postStylesUrl from "~/styles/post.css";
 import type { SeriesRecord } from "~/lib/types.d";
+import seriesStylesUrl from "~/styles/series.css";
 
 type LoaderData = {
   series: SeriesRecord;
@@ -14,6 +14,9 @@ const SERIES_QUERY = `query Series($slug: String) {
     posts {
       slug
       title
+    }
+    art {
+      url
     }
   }
 }`;
@@ -34,7 +37,7 @@ export function meta({ data }: { data: LoaderData }) {
 }
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: postStylesUrl }];
+  return [{ rel: "stylesheet", href: seriesStylesUrl }];
 };
 
 export default function Index() {
@@ -60,6 +63,7 @@ export default function Index() {
           </ul>
         </div>
       </section>
+      {series.art && <img className="series-art" src={series.art.url} />}
     </main>
   );
 }
