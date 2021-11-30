@@ -48,7 +48,9 @@ export default function Index() {
       <Outlet />
       <section className="series">
         <div className="series-content">
-          <h2 className="series-title">{series.title}</h2>
+          <h2 className="series-title">
+            <span>Series</span> {series.title}
+          </h2>
           <ul className="series-list">
             {series.posts.map(({ slug, title }) => (
               <li key={slug}>
@@ -60,6 +62,9 @@ export default function Index() {
                 </NavLink>
               </li>
             ))}
+            <li>
+              <NavLink to="/">Test</NavLink>
+            </li>
           </ul>
         </div>
       </section>

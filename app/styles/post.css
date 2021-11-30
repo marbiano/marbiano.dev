@@ -1,37 +1,21 @@
 .post {
-  grid-column: 2;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: 34rem 1fr;
-  grid-template-rows: 30vh auto auto;
   --accent-color: 219, 80, 20;
+  grid-column: 2;
 }
 
 .post::before {
   content: "";
-  display: block;
+  display: none;
   position: fixed;
   bottom: 0;
-  right: 10rem;
+  right: 12vw;
   width: 1px;
   height: 6rem;
-  background: rgba(var(--accent-color), 1);
-}
-
-.cover {
-  position: fixed;
-  top: 0;
-  right: 0;
-  mask-image: linear-gradient(to right, transparent 25%, black 50%);
-  -webkit-mask-image: linear-gradient(to right, transparent 25%, black 50%);
-  filter: blur(1px);
-}
-
-.cover img {
-  display: block;
-  width: 1000px;
-  mask-image: linear-gradient(15deg, transparent 30%, black 50%);
-  -webkit-mask-image: linear-gradient(15deg, transparent 30%, black 50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--accent-color), 0.5),
+    rgba(var(--accent-color))
+  );
 }
 
 .header {
@@ -42,7 +26,7 @@
 
 .title {
   line-height: 1;
-  font-size: 6rem;
+  font-size: 5rem;
   letter-spacing: -0.045em;
   position: relative;
   margin: 0;
@@ -54,8 +38,7 @@
     to right,
     hsl(var(--color-black)) 0%,
     hsl(var(--color-black) / 0.9) 60%,
-    rgba(var(--accent-color, 1)) 90%,
-    rgba(var(--accent-color, 1), 0.8)
+    rgba(var(--accent-color), 0.8)
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -65,9 +48,10 @@
 
 .created {
   display: block;
-  font-size: 1rem;
-  color: hsl(var(--color-black) / 0.33);
-  margin-top: 1rem;
+  font-family: MarbMono;
+  font-size: 0.9rem;
+  color: hsl(var(--color-black) / 0.4);
+  margin-top: 2rem;
 }
 
 .content {
@@ -77,18 +61,18 @@
   font-size: 1.25rem;
   line-height: 1.6;
   color: hsl(var(--color-black) / 0.7);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.6rem;
 }
 
 .content p {
-  margin-bottom: 1.75em;
+  margin-bottom: 1.6em;
 }
 
 .content h2 {
   font-family: MarbSans;
   font-size: 2.2rem;
   color: hsl(var(--color-black) / 0.9);
-  margin: 3.5rem 0 1.75rem;
+  margin: 3.2rem 0 1.6rem;
   letter-spacing: -0.033em;
 }
 
@@ -96,22 +80,34 @@
   font-family: MarbSans;
   font-size: 1.5rem;
   color: hsl(var(--color-black) / 0.8);
-  margin: 1.75rem 0 0;
+  margin: 1.6rem 0 0;
   letter-spacing: -0.033em;
 }
 
-.content ul {
-  margin: 0 0 1.75em;
-  padding: 0;
+.content ul,
+.content ol {
+  margin: 0 0 2rem;
+  padding: 0 0 0 2rem;
+  line-height: 1.5;
 }
 
-.content li + li {
-  margin-top: 0.5rem;
+.content ul li p,
+.content ol li p {
+  margin: 0;
 }
 
-.content li::marker {
-  content: "› ";
+.content ul li + li,
+.content ol li + li {
+  margin-top: 1rem;
+}
+
+.content ul li::marker,
+.content ol li::marker {
   color: #db5014;
+}
+
+.content ul li::marker {
+  content: "› ";
 }
 
 hr.separator {
@@ -128,6 +124,22 @@ hr.separator {
 
 .content a {
   color: rgba(var(--accent-color));
+  background: linear-gradient(
+    to right,
+    rgba(var(--accent-color)),
+    rgba(var(--accent-color)) 33%,
+    rgba(var(--accent-color), 0.66)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 200ms ease-in-out, border 200ms ease-in-out;
+  border-bottom: 1px solid transparent;
+}
+
+.content a:hover {
+  background-color: rgba(var(--accent-color));
+  border-color: rgba(var(--accent-color), 0.33);
 }
 
 .content strong {
@@ -176,4 +188,27 @@ hr.separator {
   content: "—";
   display: inline-block;
   padding-right: 0.25rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .post {
+    display: grid;
+    grid-template-columns: 34rem 1fr;
+    grid-template-rows: 30vh auto auto;
+  }
+
+  .title {
+    font-size: 6rem;
+  }
+
+  .created {
+    font-size: 1rem;
+    margin-top: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 62em) {
+  .post::before {
+    display: block;
+  }
 }

@@ -142,9 +142,9 @@ input:where([type="search"]) {
 
 .logo {
   color: #fff;
-  position: fixed;
+  position: absolute;
   top: 1.5rem;
-  left: 2rem;
+  left: 1.5rem;
   z-index: 9999;
 }
 
@@ -155,4 +155,12 @@ input:where([type="search"]) {
 .logo svg {
   display: block;
   width: 2rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .logo {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+  }
 }
