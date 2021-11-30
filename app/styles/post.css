@@ -127,5 +127,53 @@ hr.separator {
 }
 
 .content a {
-  color: rgba(var(--accent-color, 1));
+  color: rgba(var(--accent-color));
+}
+
+.content strong {
+  color: hsl(var(--color-black) / 0.85);
+}
+
+.content blockquote {
+  padding: 4.5rem 2rem 0 0;
+  font-family: MarbSerif;
+  color: hsl(var(--color-black));
+  margin: 0 0 3rem;
+  line-height: 1.66;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.content blockquote:before {
+  content: "“";
+  display: block;
+  font-family: MarbSans;
+  font-size: 5em;
+  line-height: 1;
+  color: rgba(var(--accent-color));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.content blockquote p {
+  margin: 0;
+}
+
+.content blockquote p + p {
+  margin-top: 0.5rem;
+}
+
+.content blockquote footer {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-family: MarbSans;
+  color: hsl(var(--color-black) / 0.5);
+}
+
+.content blockquote footer:before {
+  content: "—";
+  display: inline-block;
+  padding-right: 0.25rem;
 }
