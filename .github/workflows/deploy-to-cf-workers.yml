@@ -38,6 +38,8 @@ jobs:
           secrets: |
             DATOCMS_API_URL
             DATOCMS_API_TOKEN
+            FATHOM_SITE_ID
         env:
           DATOCMS_API_URL: ${{ secrets.DATOCMS_API_URL }}
           DATOCMS_API_TOKEN: ${{ secrets.DATOCMS_API_TOKEN }}
+          FATHOM_SITE_ID: ${{ secrets.FATHOM_SITE_ID }}

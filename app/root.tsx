@@ -8,11 +8,24 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
+  useLocation,
 } from "remix";
 import type { LinksFunction } from "remix";
+import * as Fathom from "fathom-client";
 
 import globalStylesUrl from "~/styles/global.css";
 import Logo from "~/components/Logo";
+
+export function loader() {
+  const fathomSiteId =
+    typeof FATHOM_SITE_ID !== "undefined" ? FATHOM_SITE_ID : null;
+  return {
+    env: {
+      FATHOM_SITE_ID: fathomSiteId,
+    },
+  };
+}
 
 export const links: LinksFunction = () => {
   return [
@@ -36,7 +49,7 @@ export const links: LinksFunction = () => {
     },
     {
       rel: "preload",
-      href: "/fonts/marb-sans-mono.woff2",
+      href: "/fonts/marb-mono-regular.woff2",
       as: "font",
       crossOrigin: "anonymous",
     },
@@ -45,6 +58,9 @@ export const links: LinksFunction = () => {
 };
 
 export default function App() {
+  let { env } = useLoaderData();
+  useFathom(env.FATHOM_SITE_ID);
+
   return (
     <Document>
       <Layout>
@@ -89,6 +105,24 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
       {children}
     </div>
   );
+}
+
+function useFathom(siteId: string) {
+  const isLoaded = React.useRef(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (siteId) {
+      if (!isLoaded.current) {
+        Fathom.load(siteId, {
+          includedDomains: ["marbiano.dev"],
+        });
+        isLoaded.current = true;
+      } else {
+        Fathom.trackPageview();
+      }
+    }
+  }, [location]);
 }
 
 export function CatchBoundary() {
