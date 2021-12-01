@@ -34,6 +34,12 @@ export const links: LinksFunction = () => {
       as: "font",
       crossOrigin: "anonymous",
     },
+    {
+      rel: "preload",
+      href: "/fonts/marb-sans-mono.woff2",
+      as: "font",
+      crossOrigin: "anonymous",
+    },
     { rel: "stylesheet", href: globalStylesUrl },
   ];
 };

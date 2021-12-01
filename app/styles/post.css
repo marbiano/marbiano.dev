@@ -70,7 +70,7 @@
 
 .content h2 {
   font-family: MarbSans;
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: hsl(var(--color-black) / 0.9);
   margin: 3.2rem 0 1.6rem;
   letter-spacing: -0.033em;
@@ -204,6 +204,10 @@ hr.separator {
   .created {
     font-size: 0.95rem;
     margin-top: 1.25rem;
+  }
+
+  .content h2 {
+    font-size: 2.2rem;
   }
 
   .content blockquote {
