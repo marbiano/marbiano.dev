@@ -9,6 +9,7 @@ import postStylesUrl from "~/styles/post.css";
 type LoaderData = {
   post: PostRecord;
   url: string;
+  pageCount: string;
 };
 
 const POST_QUERY = `query Post($slug: String) {
@@ -35,11 +36,22 @@ const POST_QUERY = `query Post($slug: String) {
 }`;
 
 export const loader: LoaderFunction = async ({ request: req, params }) => {
-  const data = await request({
-    query: POST_QUERY,
-    variables: { slug: params.post },
-  });
-  return json({ ...data, url: req.url });
+  if (params.post) {
+    const [data, count] = await Promise.all([
+      request({
+        query: POST_QUERY,
+        variables: { slug: params.post },
+      }),
+      PAGEVIEWS.get(params.post),
+    ]);
+
+    const newCount = count ? Number(count) + 1 : 1;
+    await PAGEVIEWS.put(params.post, newCount.toString());
+
+    return json({ ...data, url: req.url, pageCount: newCount });
+  } else {
+    return json({ url: req.url });
+  }
 };
 
 export function meta({ data }: { data: LoaderData }) {
@@ -60,7 +72,7 @@ export const links: LinksFunction = () => {
 };
 
 export default function Index() {
-  let { post } = useLoaderData<LoaderData>();
+  let { post, pageCount } = useLoaderData<LoaderData>();
   const { title, content, _publishedAt: published, accentColor } = post;
   const accentColorStyle = accentColor
     ? `${accentColor.red}, ${accentColor.blue}, ${accentColor.green}`
@@ -78,7 +90,13 @@ export default function Index() {
           <span>{title}</span>
         </h1>
         <div className="created">
-          {new Date(published).toLocaleDateString()}
+          Published on{" "}
+          {new Date(published).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+          . Viewed {Number(pageCount).toLocaleString()} times.
         </div>
       </header>
       <section className="content">

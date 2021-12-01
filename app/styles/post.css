@@ -26,7 +26,7 @@
 
 .title {
   line-height: 1;
-  font-size: 5rem;
+  font-size: 4.5rem;
   letter-spacing: -0.045em;
   position: relative;
   margin: 0;
@@ -50,7 +50,7 @@
   display: block;
   font-family: MarbMono;
   font-size: 0.9rem;
-  color: hsl(var(--color-black) / 0.4);
+  color: hsl(var(--color-black) / 0.5);
   margin-top: 2rem;
 }
 
@@ -198,11 +198,11 @@ hr.separator {
   }
 
   .title {
-    font-size: 6rem;
+    font-size: 5rem;
   }
 
   .created {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-top: 1.25rem;
   }
 }

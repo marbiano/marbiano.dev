@@ -62,9 +62,6 @@ export default function Index() {
                 </NavLink>
               </li>
             ))}
-            <li>
-              <NavLink to="/">Test</NavLink>
-            </li>
           </ul>
         </div>
       </section>

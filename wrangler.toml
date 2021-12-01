@@ -5,6 +5,9 @@ account_id = "71fabf45fe62453d4c8554e835ca4781"
 zone_id = "9b0305767b86bbda17623a2608822a1b"
 route = "marbiano.dev/*"
 compatibility_date = "2021-11-22"
+kv_namespaces = [ 
+    { binding = "PAGEVIEWS", id = "d936a3cfd189485d9a729b9986d5d302" }
+]
 
 [site]
 bucket = "./public"
