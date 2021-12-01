@@ -1,7 +1,8 @@
-import type { MetaFunction, LoaderFunction } from "remix";
+import type { MetaFunction, LoaderFunction, LinksFunction } from "remix";
 import { useLoaderData, Link } from "remix";
 import { request } from "~/lib/dato-client";
 import type { SeriesRecord } from "~/lib/types.d";
+import homeStylesUrl from "~/styles/home.css";
 
 type LoaderData = {
   allSeries: SeriesRecord[];
@@ -11,6 +12,10 @@ const ALL_SERIES_QUERY = `query AllSeries($limit: IntType) {
   allSeries(first: $limit) {
     title
     slug
+    posts {
+      slug
+      title
+    }
   }
 }`;
 
@@ -28,14 +33,30 @@ export let meta: MetaFunction = () => {
   };
 };
 
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: homeStylesUrl }];
+};
+
 export default function Index() {
   let { allSeries } = useLoaderData<LoaderData>();
 
   return (
-    <ul>
-      {allSeries.map(({ title, slug }) => (
-        <li>
-          <Link to={slug as string}>{title}</Link>
+    <ul className="boxes">
+      {allSeries.map(({ title, slug, posts }) => (
+        <li key={slug}>
+          <h2>Series</h2>
+          <h3>
+            <span>{title}</span>
+          </h3>
+          {posts.slice(0, 5).length > 0 && (
+            <ul className="posts">
+              {posts.map(({ slug: postSlug, title }) => (
+                <li key={postSlug}>
+                  <Link to={`/${slug}/${postSlug}`}>{title}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ul>

@@ -1,0 +1,87 @@
+.boxes {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-rows: masonry;
+  list-style: none;
+  margin: 0;
+  padding: 10vh 1rem 0;
+}
+
+.boxes::before {
+  content: "";
+  display: block;
+  position: fixed;
+  right: 0;
+  bottom: 15vh;
+  height: 1px;
+  width: 10rem;
+  background: linear-gradient(
+    to right,
+    hsl(var(--color-orange) / 0.5),
+    hsl(var(--color-orange))
+  );
+}
+
+.boxes > li {
+  border: 1px solid hsl(var(--color-black) / 0.15);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1.5rem 2rem 2rem;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 hsl(var(--color-black) / 0.1);
+}
+
+.boxes h2 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: hsl(var(--color-black) / 0.55);
+  margin: 0;
+}
+
+.boxes h3 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+}
+
+.boxes h3 span {
+  color: hsl(var(--color-black));
+  background: linear-gradient(
+    to right,
+    hsl(var(--color-black)) 0%,
+    hsl(var(--color-black) / 0.9) 60%,
+    hsl(var(--color-orange) / 0.8)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.boxes .posts {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+  font-size: 1.2rem;
+  font-family: MarbSerif;
+}
+
+.boxes .posts li + li {
+  margin-top: 0.5rem;
+}
+
+.boxes .posts li::marker {
+  content: "› ";
+  color: #db5014;
+}
+
+.boxes .posts a {
+  color: hsl(var(--color-black) / 0.8);
+  transition: color 200ms ease-in-out;
+  padding: 3px;
+}
+
+.boxes .posts a:hover {
+  color: hsl(var(--color-orange));
+  text-decoration: none;
+}
