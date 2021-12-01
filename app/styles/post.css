@@ -26,7 +26,7 @@
 
 .title {
   line-height: 1;
-  font-size: 4.5rem;
+  font-size: 4rem;
   letter-spacing: -0.045em;
   position: relative;
   margin: 0;
@@ -49,7 +49,7 @@
 .created {
   display: block;
   font-family: MarbMono;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: hsl(var(--color-black) / 0.5);
   margin-top: 2rem;
 }
@@ -147,7 +147,7 @@ hr.separator {
 }
 
 .content blockquote {
-  padding: 4.5rem 2rem 0 0;
+  padding: 4rem 2rem 0 0;
   font-family: MarbSerif;
   color: hsl(var(--color-black));
   margin: 0 0 3rem;
@@ -204,6 +204,10 @@ hr.separator {
   .created {
     font-size: 0.95rem;
     margin-top: 1.25rem;
+  }
+
+  .content blockquote {
+    padding-top: 4.5rem;
   }
 }
 

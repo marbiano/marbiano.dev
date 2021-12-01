@@ -90,13 +90,8 @@ export default function Index() {
           <span>{title}</span>
         </h1>
         <div className="created">
-          Published on{" "}
-          {new Date(published).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-          . Viewed {Number(pageCount).toLocaleString()} times.
+          Posted on {new Date(published).toLocaleDateString("en-US")}, viewed{" "}
+          {Number(pageCount).toLocaleString()} times.
         </div>
       </header>
       <section className="content">
