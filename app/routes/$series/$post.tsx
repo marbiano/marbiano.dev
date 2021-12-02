@@ -73,9 +73,10 @@ export const links: LinksFunction = () => {
 
 export default function Index() {
   let { post, pageCount } = useLoaderData<LoaderData>();
+  console.log("post is", post);
   const { title, content, _publishedAt: published, accentColor } = post;
   const accentColorStyle = accentColor
-    ? `${accentColor.red}, ${accentColor.blue}, ${accentColor.green}`
+    ? `${accentColor.red}, ${accentColor.green}, ${accentColor.blue}`
     : null;
 
   return (
