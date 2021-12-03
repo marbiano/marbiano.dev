@@ -52,7 +52,9 @@ export default function Index() {
             <ul className="posts">
               {posts.map(({ slug: postSlug, title }) => (
                 <li key={postSlug}>
-                  <Link to={`/${slug}/${postSlug}`}>{title}</Link>
+                  <Link to={`/${slug}/${postSlug}`} prefetch="intent">
+                    {title}
+                  </Link>
                 </li>
               ))}
             </ul>

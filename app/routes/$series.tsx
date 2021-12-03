@@ -57,6 +57,7 @@ export default function Index() {
                 <NavLink
                   to={slug as string}
                   className={({ isActive }) => (isActive ? "is-active" : "")}
+                  prefetch="intent"
                 >
                   {title}
                 </NavLink>
