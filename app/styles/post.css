@@ -135,6 +135,7 @@ hr.separator {
   -webkit-text-fill-color: transparent;
   transition: background 200ms ease-in-out, border 200ms ease-in-out;
   border-bottom: 1px solid transparent;
+  display: inline-block;
 }
 
 .content a:hover {
