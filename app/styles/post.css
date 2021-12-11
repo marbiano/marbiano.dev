@@ -136,6 +136,7 @@ hr.separator {
   transition: background 200ms ease-in-out, border 200ms ease-in-out;
   border-bottom: 1px solid transparent;
   display: inline-block;
+  line-height: 1.15;
 }
 
 .content a:hover {
