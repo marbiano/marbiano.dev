@@ -1,5 +1,7 @@
 # Welcome to Remix!
 
+[![smithery badge](https://smithery.ai/badge/@marbiano/marbiano-dev)](https://smithery.ai/server/@marbiano/marbiano-dev)
+
 - [Remix Docs](https://remix.run/docs)
 
 ## Development
